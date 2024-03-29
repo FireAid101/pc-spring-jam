@@ -98,10 +98,10 @@ class Island:
        
     # Generate biomes via simple random number generator
     def generate_biomes(self):
-        for y in range(6):
+        for y in range(3):
             biome_row = []
 
-            for x in range(6):
+            for x in range(3):
                 biome_row.append(Biome(random.randrange(1, 6)))
                 
             self.biomes.append(biome_row)
@@ -125,8 +125,8 @@ class Island:
 
                     # '#' represents land while '.' represents water, handle each case
                     if self.grid[y][x] == '#':
-                        gx = int(x / 34) - 1
-                        gy = int(y / 34) - 1
+                        gx = int(x / 66) - 1
+                        gy = int(y / 66) - 1
                         match self.biomes[gy][gx]:
                             case Biome.DESERT:
                                 src = pygame.Rect(24, 0, 12, 12)    
