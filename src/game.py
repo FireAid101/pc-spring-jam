@@ -11,7 +11,9 @@ clock = pygame.time.Clock()
 isDone = False
 
 camera = [0, 0, 320, 180]
-map = island.Island(30, 30)
+map = island.Island(50, 50)
+map.sim(2)
+map.sim_once()
 
 while not isDone:
     # Check events
@@ -23,7 +25,7 @@ while not isDone:
 
     # Draw here 
     screen.fill("black")
-    map.draw(screen)
+    map.draw(screen, SCALE)
 
     pygame.display.flip()
     clock.tick(60)
