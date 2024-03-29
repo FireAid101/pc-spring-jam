@@ -4,6 +4,14 @@
 # We will use regular cellular automata to generate the big island first
 import pygame
 import random
+from enum import Enum
+
+class Biome(Enum):
+    PLAINS = 1
+    DESERT = 2
+    FOREST = 3
+    TUNRDA = 4
+    TAIGA = 5
 
 class Island:
     def __init__(self, width, height):
@@ -26,8 +34,8 @@ class Island:
 
             self.grid.append(temp)
 
-    def sim(self, cycles):
-        for i in range(cycles):
+    def generate(self):
+        for i in range(20):
             for y in range(5, self.height - 5):
                 for x in range(5, self.width - 5): 
                     neighbourCount = 0
@@ -40,23 +48,10 @@ class Island:
                     if self.grid[y + 1][x] == '#': neighbourCount += 1
                     if self.grid[y + 1][x - 1] == '#': neighbourCount += 1
 
-                    # if neighbourCount == 2 or neighbourCount == 3 and self.grid[y][x] == '#':
-                    #     self.grid[y][x] = '#'
-                    #     next
-                    
-                    # if neighbourCount > 3 and self.grid[y][x] == '#':
-                    #     self.grid[y][x] = '.'
-                    #     next
-
-                    # if neighbourCount < 2 and self.grid[y][x] == '#':
-                    #     self.grid[y][x] = '.'
-                    #     next
-
                     if neighbourCount == 3 and self.grid[y][x] == '.':
                         self.grid[y][x] = '#'
                         next
 
-    def sim_once(self):
         for y in range(5, self.height - 5):
             for x in range(5, self.width - 5): 
                 neighbourCount = 0
@@ -69,26 +64,22 @@ class Island:
                 if self.grid[y + 1][x] == '#': neighbourCount += 1
                 if self.grid[y + 1][x - 1] == '#': neighbourCount += 1
 
-                if neighbourCount == 2 or neighbourCount == 3 and self.grid[y][x] == '#':
+                if neighbourCount > 3 and self.grid[y][x] == '.':
                     self.grid[y][x] = '#'
-                    next
-                
-                if neighbourCount > 3 and self.grid[y][x] == '#':
-                    self.grid[y][x] = '.'
                     next
 
                 if neighbourCount < 2 and self.grid[y][x] == '#':
                     self.grid[y][x] = '.'
                     next
-
-                if neighbourCount == 3 and self.grid[y][x] == '.':
-                    self.grid[y][x] = '#'
-                    next
-
-    def draw(self, screen, scale):
+       
+    def draw(self, screen : pygame.surface, scale : int, camera : pygame.Rect):
         for y in range(0, self.height):
             for x in range(0, self.width):
                 if self.grid[y][x] == '#':
-                    pos = pygame.Rect((x * 2) * scale + (x * scale), (y * 2) * scale + (y * scale), 2 * scale, 2 * scale)
-                    pygame.draw.rect(screen, "green", pos)
+                    # Simple occullsion culling
+                    if x * 2 > camera.x and x * 2 < camera.right and y * 2 > camera.y and y * 2 < camera.bottom:
+                        pos = pygame.Rect((x * 2) * scale, (y * 2) * scale, 2 * scale, 2 * scale)
+                        pos.x -= camera.x * scale
+                        pos.y -= camera.y * scale
+                        pygame.draw.rect(screen, "green", pos)
 
