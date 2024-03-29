@@ -1,0 +1,35 @@
+The themes is Temprerature
+--------------------------
+
+I really wanted to make a minicraft-inspired game so. I'm thinking a top down 2d survival game with cool particle effects.
+
+But how do I incoporate this idea with the theme.
+
+Since people want a spring themed jam. Maybe we make the game take place at the end of winter, beginning of spring.
+Maybe a more relaxing experience. You still need to look out for temprerature.
+
+Here is the final idea:
+
+ThermoCraft is a minicraft inspired game:
+
+Where you get washed up on shore on an island and you need to reach an extraction point. You start with some tatherd clothes and need to make your way to the extraction point.
+So the goal is simple, reach the extraction point and not die.
+
+This is going to be a rougelite, so it has some rougelike elements like random level generation and permadeath.
+
+Mechanics
+--------
+1. Simple food and hunger system.
+2. Random island generation with multiple biomes
+3. Complex temprerature system
+    - Clothing system for different body parts
+    - Depending on your activity that you do
+    - Time of day -- that's right a day and night cycle
+    - Depending on the biome
+4. Clothing system
+5. Day and night cycle
+6. Crafting system
+7. Building system
+8. Simple enemy AI
+
+I want the game to be challenging but I still want people who don't put a lot of time to really enjoy it anyway.
